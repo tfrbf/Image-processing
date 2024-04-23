@@ -1,7 +1,7 @@
 import cv2 as cv
 import time 
 
-cam = cv.VideoCapture(0)
+cam = cv.VideoCapture(1)
 num_frames = 120
 
 start = time.time()
@@ -11,11 +11,15 @@ for i in range(0, num_frames):
 
 end = time.time()
 
-secondes = end - start
+seconds = end - start
 
-fps = num_frames / 120
+fps = num_frames / seconds
 
-print("Resplution is:  (%d, %d) Pixels" %(cam.get(3), cam.get(4)))
-print("FPS is: ", int(fps))
+# Retrieve frame width and height
+width = int(cam.get(cv.CAP_PROP_FRAME_WIDTH))
+height = int(cam.get(cv.CAP_PROP_FRAME_HEIGHT))
+
+print("Resolution is: (%d, %d) pixels" % (width, height))
+print("FPS is:", int(fps))
 
 cam.release()
